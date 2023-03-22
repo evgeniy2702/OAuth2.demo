@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>OAuth2_Demo</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" href="../static/css/main.css"/>
+    <script type="text/javascript" src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/2.1.0/js.cookie.js"></script>
+</head>
+<body>
+<div style="text-align: center;">
+    <h1>OAuth2_Demo</h1>
+    <br/>
+</div>
+<div id="git" class="container unauthenticated" style="text-align: center;" >
+    With GitHub: <a href="/oauth2/authorization/github" >Git Hub</a>
+</div>
+<div id="google" class="container unauthenticated" style="text-align: center;">
+    With Google: <a href="/oauth2/authorization/google" >Google</a>
+</div>
+<br/>
+<div class="container unauthenticated" style="text-align: center; ">
+    <span class="error" th:text="${message}" style="color: red; font-weight: bold"></span>
+    <form name='As user : ' action="/authentication" method='POST'>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label for="name">User :</label>
+        <input id="name" type='text' name='username' />
+        <label for="password">Password:</label>
+        <input id="password" type='password' name='password' />
+        <input name="submit" type="submit" value="Submit" />
+    </form>
+</div>
+/
+<div class="container authenticated" style="text-align: center; ">
+    Вы вошли как: <span id="user" th:text="${userName}"></span>
+    <div >
+        <button onClick="logout()" class="btn btn-primary">Выйти</button>
+    </div>
+</div>
+
+<div class="container text-danger error" style="text-align: center;" ></div>
+
+<script type="text/javascript" th:src="@{/script/script.js}" src="../static/script/script.js"></script>
+</body>
+</html>
